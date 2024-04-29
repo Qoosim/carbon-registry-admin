@@ -21,3 +21,18 @@ export const navItems = [
     }
   ]
   
+  export const panels = [
+    {
+      url: "admin-dashboard",
+      text: "Dashboard",
+    },
+    {
+      url: "org-request",
+      text: "Org Request",
+    },
+    {
+      url: "project-request",
+      text: "Project Request",
+    },
+  ];
+  

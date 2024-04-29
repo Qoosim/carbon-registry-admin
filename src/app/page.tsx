@@ -1,9 +1,5 @@
-import Image from "next/image";
+import LoginHome from "./(auth)/login/page";
 
-export default function Home() {
-  return (
-    <main>
-      <h1>Home Page</h1>
-    </main>
-  );
-}
+const Home = () => <LoginHome />;
+
+export default Home;

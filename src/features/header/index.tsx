@@ -22,28 +22,9 @@ export const Header = () => {
   const dispatch = store.dispatch;
   const pathname = usePathname() || "";
 
-  //   let notShowHeader = [
-  //     "/organization",
-  //     "/org-dashboard",
-  //     "/dashboard",
-  //     "/insights",
-  //     "/insights/create",
-  //     "/insights/inner-pro-details",
-  //     "/settings",
-  //     "/projects",
-  //     `/company/${orgId}/projects`,
-  //     `/company/${orgId}/projects/onboarding`,
-  //   ];
+  const notDisplay = ["/admin-dashboard", "/org-request", "/project-request"];
 
-  //   if (orgId) {
-  //     notShowHeader = [
-  //       ...notShowHeader,
-  //       `/company/${orgId}/projects`,
-  //       `/company/${orgId}/projects/onboarding`,
-  //     ];
-  //   }
-
-  //   const hideHeader = notShowHeader.includes(pathname);
+  const hideHeader = notDisplay.includes(pathname);
 
   const handleLogout = () => {
     dispatch(signOut());
@@ -54,68 +35,70 @@ export const Header = () => {
 
   return (
     <>
-      <header className="fixed flex justify-between px-6 py-2 border-b shadow-lg bg-[#fff] z-40 w-full">
-        <Link href={`/`}>
-          <Image
-            src={LasepaLogo}
-            width={250}
-            height={250}
-            alt="ICR Logo"
-            className="hidden sm:block"
-          />
-          <Image
-            src={LasepaLogo}
-            width={180}
-            height={180}
-            alt="ICR Logo"
-            className="sm:hidden"
-          />
-        </Link>
-        <nav className="hidden sm:flex items-center gap-16 md:gap-6 lg:gap-16 text-[#000]">
-          <ul className="flex items-center md:text-sm lg:text-lg whitespace-nowrap gap-6 font-poppins tracking-wide font-semibold">
-            {navItems.map((item) => {
-              return (
-                <li key={item.name}>
-                  <Link href={item.link} className="mb-5">
-                    {item.name}
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-          {user ? (
-            <div
-              className="flex items-center gap-2 font-normal ml-16 text-red-500 outline outline-1 px-3 py-1 rounded-lg hover:opacity-60"
-              onClick={handleLogout}
-            >
-              <button className="italic">Logout</button>
-            </div>
-          ) : (
-            <div className="flex items-center gap-2 font-semibold font-poppins tracking-wider">
-              <Link
-                href="/login"
-                className="hover:bg-gray-200 px-4 py-2 rounded-md text-base font-semibold"
+      {!hideHeader && (
+        <header className="fixed flex justify-between px-6 py-2 border-b shadow-lg bg-[#fff] z-40 w-full">
+          <Link href={`/`}>
+            <Image
+              src={LasepaLogo}
+              width={250}
+              height={250}
+              alt="ICR Logo"
+              className="hidden sm:block"
+            />
+            <Image
+              src={LasepaLogo}
+              width={180}
+              height={180}
+              alt="ICR Logo"
+              className="sm:hidden"
+            />
+          </Link>
+          <nav className="hidden sm:flex items-center gap-16 md:gap-6 lg:gap-16 text-[#000]">
+            <ul className="flex items-center md:text-sm lg:text-lg whitespace-nowrap gap-6 font-poppins tracking-wide font-semibold">
+              {navItems.map((item) => {
+                return (
+                  <li key={item.name}>
+                    <Link href={item.link} className="mb-5">
+                      {item.name}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+            {user ? (
+              <div
+                className="flex items-center gap-2 font-normal ml-16 text-red-500 outline outline-1 px-3 py-1 rounded-lg hover:opacity-60"
+                onClick={handleLogout}
               >
-                Login
-              </Link>
-              <Link
-                href="/signup"
-                className="bg-[#0c691f] px-4 py-2 rounded-md text-white text-base"
-              >
-                Register
-              </Link>
-            </div>
-          )}
-        </nav>
-        <button
-          onClick={onClose}
-          type="button"
-          className="block px-2 sm:hidden"
-        >
-          <MdMenu className="text-[32px]" />
-        </button>
-        {isMobileNav && <MobileNav close={onClose} />}
-      </header>
+                <button className="italic">Logout</button>
+              </div>
+            ) : (
+              <div className="flex items-center gap-2 font-semibold font-poppins tracking-wider">
+                <Link
+                  href="/login"
+                  className="hover:bg-gray-200 px-4 py-2 rounded-md text-base font-semibold"
+                >
+                  Login
+                </Link>
+                <Link
+                  href="/signup"
+                  className="bg-[#0c691f] px-4 py-2 rounded-md text-white text-base"
+                >
+                  Register
+                </Link>
+              </div>
+            )}
+          </nav>
+          <button
+            onClick={onClose}
+            type="button"
+            className="block px-2 sm:hidden"
+          >
+            <MdMenu className="text-[32px]" />
+          </button>
+          {isMobileNav && <MobileNav close={onClose} />}
+        </header>
+      )}
     </>
   );
 };
