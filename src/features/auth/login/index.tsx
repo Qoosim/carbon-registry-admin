@@ -33,18 +33,17 @@ const Login = () => {
     signIn(data, router);
 
   return (
-    <section className="bg-[#ebedf5] w-full h-screen pt-[25%] sm:pt-[9%]">
+    <section className="bg-[#ebedf5] w-full flex items-center justify-center py-8 sm:py-0">
       <div className="max-w-[90%] sm:max-w-[70%] mx-auto w-[85%] sm:w-[60%] lg:w-[30%]">
         <h1 className="text-center mb-8 font-telex font-semibold text-slate-600 text-xl sm:text-2xl">
           Sign in to Lasepa Admin
         </h1>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          {/* <div className="border-b-2 pb-6 border-gray-500 mb-5 whitespace-nowrap"></div> */}
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
           <input
             type="email"
             id="email"
             placeholder="Staff Email"
-            className="p-2 bg-[#fff] rounded-md focus:outline-none focus:ring-2 focus:ring-green-800 focus:border-transparent border-none w-full mb-5"
+            className="p-2 bg-[#fff] rounded-md focus:outline-none focus:ring-2 focus:ring-green-800 focus:border-transparent border-none w-full"
             {...register("email")}
           />
           {errors.email?.message && (

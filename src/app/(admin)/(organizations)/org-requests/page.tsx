@@ -1,5 +1,5 @@
 import React from 'react'
-import { OrganizationRequest } from '@/components/organizationRequest'
+import { OrganizationRequest } from '@/components/organizations/organizationRequest'
 
 const page = () => <OrganizationRequest />
 
