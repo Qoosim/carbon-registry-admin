@@ -8,14 +8,14 @@ export const metadata: Metadata = {
   description: "LASEPA",
 };
 
-export default function AdminAuth({
+export default function AdminAuthLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <div className="font-notoSans bg-[#ebedf5] flex flex-col">
-      <nav className="pt-12 pl-12">
+    <div className="font-notoSans bg-[#ebedf5] flex flex-col min-h-screen overflow-x-hidden">
+      <nav className="pt-6 pl-6 sm:pt-12 sm:pl-12">
         <Image
           src={LasepaLogo}
           width={200}
@@ -24,7 +24,11 @@ export default function AdminAuth({
           className="rounded-lg"
         />
       </nav>
-      <main className="-pt-16">{children}</main>
+      <main className="flex justify-center items-center pt-8 sm:pt-10">
+        {children}
+      </main>
     </div>
   );
 }
+
+// className="-pt-16"

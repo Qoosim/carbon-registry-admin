@@ -7,23 +7,23 @@ import { toast, TypeOptions } from "react-toastify";
 import { setIsLoading, setUser, setUserError } from './authSlice';
 
 export const signUp = async (
-  data: { first_name: any; last_name: any; email: any; phone: number; gender: string; password: any; confirm_password: any },
+  data: { username: any; email: any; phone: number; password: any; confirm_password: any },
   router: AppRouterInstance | string[],
   reset: () => void
 ) => {
   const  dispatch = store.dispatch
   dispatch(setIsLoading(true))
   const payload = {
-    first_name: data.first_name,
-    last_name: data.last_name,
+    username: data.username,
     email: data.email,
     phone: data.phone,
-    gender: data.gender,
     password: data.password,
     confirm_password: data.confirm_password
   };
   try {
-    const response = await API.post('/auth/register', payload)
+    const response = await API.post('/auth/register-admin', payload)
+    console.log("Data Received:", response);
+    
     const jsonData = response?.data
     if (jsonData?.success) {
       dispatch(setIsLoading(false))
@@ -50,7 +50,7 @@ export const signIn = async (
   dispatch(setIsLoading(true))
 
   try {
-    const response = await API.post('/auth/login', data)
+    const response = await API.post('/auth/login-admin', data)
     if (response?.data?.success) {
       const userData = response.data.user
       dispatch(setUser(userData))

@@ -11,7 +11,6 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import GoogleLogo from "../../../../public/assets/google-img.svg";
 
 export const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -34,15 +33,15 @@ export const Signup = () => {
 
     resolver: yupResolver(signupSchema) as any,
   });
-  const onSubmit = (data: any) => signUp(data, router, reset);
+  const formSubmit = (data: any) => signUp(data, router, reset);
 
   return (
-    <section className="bg-[#ebedf5] w-full h-fit pt-[25%] pb-[15%] sm:pt-[9%] sm:pb-[5%]">
+    <section className="bg-[#ebedf5] w-full h-full flex justify-center py-8 sm:py-0">
       <div className="max-w-[90%] sm:max-w-[70%] mx-auto w-[85%] sm:w-[60%] lg:w-[30%]">
         <h1 className="text-center mb-8 font-telex text-xl  sm:text-2xl">
           Signup to Lasepa Admin
         </h1>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(formSubmit)}>
           <input
             type="text"
             id="username"

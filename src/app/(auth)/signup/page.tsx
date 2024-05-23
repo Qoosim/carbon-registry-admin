@@ -1,6 +1,6 @@
 import React from "react";
 import { Signup } from "@/features/auth/signup";
 
-const page = () => <Signup />;
+const SignuoPage = () => <Signup />;
 
-export default page;
+export default SignuoPage;
