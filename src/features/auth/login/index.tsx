@@ -29,7 +29,7 @@ const Login = () => {
     resolver: yupResolver(loginSchema),
   });
 
-  const onSubmit = (data: { email: string; password: string }) =>
+  const dataSubmit = (data: { email: string; password: string }) =>
     signIn(data, router);
 
   return (
@@ -38,7 +38,7 @@ const Login = () => {
         <h1 className="text-center mb-8 font-telex font-semibold text-slate-600 text-xl sm:text-2xl">
           Sign in to Lasepa Admin
         </h1>
-        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+        <form onSubmit={handleSubmit(dataSubmit)} className="flex flex-col gap-4">
           <input
             type="email"
             id="email"
@@ -54,7 +54,7 @@ const Login = () => {
             <input
               type={showPassword ? "text" : "password"}
               id="password"
-              placeholder="Enter your password"
+              placeholder="Password"
               className="p-2 bg-[#fff] rounded-md focus:outline-none focus:ring-2 focus:ring-green-800 focus:border-transparent border-none w-full pr-10"
               {...register("password")}
             />

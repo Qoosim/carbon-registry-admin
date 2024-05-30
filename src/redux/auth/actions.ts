@@ -4,7 +4,7 @@ import { AxiosError } from 'axios';
 import Cookies from 'js-cookie';
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { toast, TypeOptions } from "react-toastify";
-import { setIsLoading, setUser, setUserError } from './authSlice';
+import { setIsLoading, setUser, setUserError, setVerifyStatus } from './authSlice';
 
 export const signUp = async (
   data: { username: any; email: any; phone: number; password: any; confirm_password: any },
@@ -42,6 +42,47 @@ export const signUp = async (
   }
 }
 
+export const OtpVerification = async (
+  data: {
+    token: string;
+    id: string;
+  },
+  router: AppRouterInstance | string[]
+) => {
+  const dispatch = store.dispatch;
+  // dispatch(setIsLoading(true));
+  try {
+    dispatch(
+      setVerifyStatus({
+        isLoading: true,
+      })
+    );
+    const response = await API.post(`/auth/verify-admin`, {
+      token: data.token,
+      id: data.id,
+    });
+    const jsonData = response.data;
+    if (jsonData.success) {
+      dispatch(
+        setVerifyStatus({
+          isLoading: false,
+          isSuccessful: true,
+        })
+      );
+      store.dispatch(setUser(jsonData.user));
+      saveCookie("userInfo", jsonData.user);
+      router.push("/dashboard");
+    }
+  } catch (error: any) {
+    dispatch(
+      setVerifyStatus({
+        isLoading: false,
+        isSuccessful: false,
+      })
+    );
+  }
+};
+
 export const signIn = async (
   data: { email: string; password: string },
   router: AppRouterInstance | string[]
@@ -55,9 +96,9 @@ export const signIn = async (
       const userData = response.data.user
       dispatch(setUser(userData))
       dispatch(setIsLoading(false))
-      alertNotification("Logged in successfully.", "success")
       saveCookie('userData', userData)
-      router.push('/dashboard')
+      alertNotification(response?.data?.message, "success")
+      router.push('/otp-verify')
     } else {
       dispatch(setUserError("Login failed. Please try again."))
       dispatch(setIsLoading(false));
@@ -70,7 +111,7 @@ export const signIn = async (
   }
 }
 
-export const saveCookie = (name: string, value: any) => {
+export const saveCookie = (name: string, value: any, expireIn = 356) => {
   if (typeof value !== "string") {
     const newVale = JSON.stringify(value);
     Cookies.set(name, newVale);

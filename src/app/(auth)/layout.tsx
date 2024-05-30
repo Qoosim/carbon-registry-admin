@@ -14,7 +14,7 @@ export default function AdminAuthLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="font-notoSans bg-[#ebedf5] flex flex-col min-h-screen overflow-x-hidden">
+    <div className="font-notoSans bg-[#ebedf5] flex flex-col w-full min-h-screen overflow-x-hidden">
       <nav className="pt-6 pl-6 sm:pt-12 sm:pl-12">
         <Image
           src={LasepaLogo}
@@ -30,5 +30,3 @@ export default function AdminAuthLayout({
     </div>
   );
 }
-
-// className="-pt-16"
