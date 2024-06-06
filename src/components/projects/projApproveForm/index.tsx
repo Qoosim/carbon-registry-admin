@@ -10,13 +10,16 @@ import { useAppSelector } from "@/redux/hooks";
 import HomeLogo from "../../../../public/assets/profile-home.svg";
 import ProfileImage from "../../../../public/assets/profile-img.jpg";
 import BackArrow from "../../../../public/assets/back-arrow.svg";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export const ProjectApproveForm = () => {
   const [isLogoutVisible, setIsLogoutVisible] = useState(false);
 
   const dispatch = store.dispatch;
   const router = useRouter();
+  const params = useSearchParams()
+
+  const projId = params.get('projectId')
 
   const { user } = useAppSelector((state) => state.user);
 
@@ -88,7 +91,7 @@ export const ProjectApproveForm = () => {
         </div>
         <div className="mt-[1%] w-fit float-end">
           <Link
-            href={"/project-basic-info"}
+            href={`/projects/${projId}`}
             className="flex items-center gap-2"
           >
             <Image

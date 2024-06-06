@@ -18,7 +18,8 @@ export const signUp = async (
     email: data.email,
     phone: data.phone,
     password: data.password,
-    confirm_password: data.confirm_password
+    confirm_password: data.confirm_password,
+    role: "ADMIN"
   };
   try {
     const response = await API.post('/auth/register-admin', payload)
@@ -97,7 +98,7 @@ export const signIn = async (
       dispatch(setUser(userData))
       dispatch(setIsLoading(false))
       saveCookie('userData', userData)
-      alertNotification(response?.data?.message, "success")
+      alertNotification("Enter your OTP", "success")
       router.push('/otp-verify')
     } else {
       dispatch(setUserError("Login failed. Please try again."))

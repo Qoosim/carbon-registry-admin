@@ -25,34 +25,38 @@ export const OrgBasicInfo = () => {
               </button>
             </Link>
           </div>
-          <div className="overflow-x-scroll mt-6">
-            <table className="table-auto border-spacing-y-2 border-spacing-x-0.5">
-              <thead>
-                <tr>
-                  {orgBasicInfoHeaderData.map((item, index) => (
-                    <th
-                      scope="col"
-                      key={index}
-                      className="p-2 !w-1/2 shrink-0 border border-gray-600 mx-1 min-w-40 whitespace-nowrap text-slate-600"
-                    >
-                      {item}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  {orgBasicInfoBodyData.map((item, index) => (
-                    <td
-                      key={index}
-                      className="text-center text-clip overflow-x-hidden whitespace-nowrap border border-gray-400 font-light py-1.5 text-sm"
-                    >
-                      {item}
-                    </td>
-                  ))}
-                </tr>
-              </tbody>
-            </table>
+          <div className="overflow-x-auto pt-10">
+            <div className="inline-block min-w-full">
+              <div className="overflow-hidden">
+                <table className="min-w-full table-auto border-spacing-y-2 border-spacing-x-0.5">
+                  <thead className="bg-gray-100">
+                    <tr>
+                      {orgBasicInfoHeaderData.map((item, index) => (
+                        <th
+                          scope="col"
+                          key={index}
+                          className="p-2 border border-gray-600 mx-1 whitespace-nowrap text-slate-600"
+                        >
+                          {item}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      {orgBasicInfoBodyData.map((item, index) => (
+                        <td
+                          key={index}
+                          className="text-clip overflow-x-hidden whitespace-nowrap border border-gray-400 text-center font-light p-2 text-base text-gray-700"
+                        >
+                          {item}
+                        </td>
+                      ))}
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
         <Footer />
