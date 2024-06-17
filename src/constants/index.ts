@@ -154,8 +154,7 @@ export const navItems = [
     "Organization Type", "Organization Name", 
     "Registration Number", "Industry", 
     "Address", "Website",
-    "People", "Organization Logo",
-    "Status", "IsPublic"
+    "Status", "LGA"
   ]
 
   export const orgBasicInfoBodyData = [

@@ -23,7 +23,6 @@ export const signUp = async (
   };
   try {
     const response = await API.post('/auth/register-admin', payload)
-    console.log("Data Received:", response);
     
     const jsonData = response?.data
     if (jsonData?.success) {

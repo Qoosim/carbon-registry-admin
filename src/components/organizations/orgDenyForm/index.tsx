@@ -10,15 +10,39 @@ import { useAppSelector } from "@/redux/hooks";
 import HomeLogo from "../../../../public/assets/profile-home.svg";
 import ProfileImage from "../../../../public/assets/profile-img.jpg";
 import BackArrow from "../../../../public/assets/back-arrow.svg";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { reviewSchema } from "@/features/auth/utils/validation";
+import { reviewOrgDeny } from "@/features/reviews/actions";
+import { ErrorMessage } from "@/features/auth/_components/error-message";
+
 
 export const OrgDenyForm = () => {
   const [isLogoutVisible, setIsLogoutVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const dispatch = store.dispatch;
   const router = useRouter();
+  const searchParam = useSearchParams();
+  const orgId = searchParam.get("orgId");
 
   const { user } = useAppSelector((state) => state.user);
+
+  const {
+    reset,
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      TypeID: `${orgId}`,
+      Description: "",
+    },
+    resolver: yupResolver(reviewSchema) as any,
+  });
+
+  const formData = (data: any) => reviewOrgDeny(data, reset, setIsLoading);
 
   const handleAvatarClick = () => {
     setIsLogoutVisible((prev) => !prev);
@@ -87,7 +111,7 @@ export const OrgDenyForm = () => {
           </div>
         </div>
         <div className="mt-[1%] w-fit float-end">
-          <Link href={"/org-basic-info"} className="flex items-center gap-2">
+          <Link href={`/org/${orgId}`} className="flex items-center gap-2">
             <Image
               src={BackArrow}
               width={15}
@@ -109,7 +133,7 @@ export const OrgDenyForm = () => {
             </span>
           </div>
           <div>
-            <form>
+            <form onSubmit={handleSubmit(formData)}>
               <div className="flex flex-col justify-start gap-2 mb-2">
                 <label
                   htmlFor="org_id"
@@ -120,43 +144,63 @@ export const OrgDenyForm = () => {
                 <input
                   type="text"
                   id="org_id"
-                  placeholder="Org ID"
+                  placeholder="Type ID"
                   className="p-2 bg-[#fff] rounded-md focus:outline-none focus:ring-2 focus:ring-green-800 focus:border-transparent border"
+                  {...register("TypeID")}
                 />
-              </div>
-              <div className="flex flex-col justify-start gap-2 mb-2">
-                <label
-                  htmlFor="title"
-                  className="font-medium text-[#6a7281] text-sm"
-                >
-                  Title
-                </label>
-                <input
-                  type="text"
-                  id="title"
-                  placeholder="Title"
-                  className="p-2 bg-[#fff] rounded-md focus:outline-none focus:ring-2 focus:ring-green-800 focus:border-transparent border"
-                />
+                {errors.TypeID?.message && (
+                  <ErrorMessage message={errors.TypeID.message} />
+                )}
               </div>
               <div className="flex flex-col justify-start gap-2 mb-2">
                 <label
                   htmlFor="reasons"
                   className="font-medium text-[#6a7281] text-sm"
                 >
-                  Reasons
+                  Description
                 </label>
                 <textarea
-                  name="reasons"
                   id="reasons"
                   placeholder="State the reason(s) for denial..."
                   className="p-2 bg-[#fff] rounded-md focus:outline-none focus:ring-2 focus:ring-green-800 focus:border-transparent border"
+                  {...register("Description")}
                 ></textarea>
+                {errors.Description?.message && (
+                  <ErrorMessage message={errors.Description?.message} />
+                )}
               </div>
               <button
+                disabled={isLoading}
                 type="submit"
                 className="bg-[#117031] w-full p-2 rounded-md mt-6 text-white font-semibold hover:opacity-80"
               >
-                Submit
+                {isLoading ? (
+                  <div className="flex justify-center items-center">
+                    <svg
+                      className="-ml-1 mr-3 h-5 w-5 animate-spin text-white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      ></circle>
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                      ></path>
+                    </svg>{" "}
+                    Processing...
+                  </div>
+                ) : (
+                  "Submit"
+                )}
               </button>
             </form>
           </div>

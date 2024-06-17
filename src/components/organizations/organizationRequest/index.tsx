@@ -60,8 +60,6 @@ export const OrganizationRequest: FC<OrgListProps> = () => {
     getAllOrgs();
   }, [dispatch]);
 
-  console.log("Org List:", fetchedOrg);
-
   const handleAvatarClick = () => {
     setIsLogoutVisible((prev) => !prev);
   };
@@ -208,7 +206,7 @@ export const OrganizationRequest: FC<OrgListProps> = () => {
                             {index + 1}
                           </td>
                           <td className="text-clip overflow-x-hidden whitespace-nowrap border border-gray-400 text-center font-light py-1.5 px-3 text-base text-green-700">
-                            <Link href={"/org-basic-info"}>{org.id}</Link>
+                            <Link href={`/org/${org.id}`}>{org.id}</Link>
                           </td>
                           <td className="text-clip overflow-x-hidden whitespace-nowrap border border-gray-400 text-center font-light py-1.5 px-3 text-base">
                             {org.UserID}
