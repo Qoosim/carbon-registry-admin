@@ -74,7 +74,7 @@ export const AdminDashboard = () => {
       }
     };
     getAllProjects();
-  }, []);
+  }, [dispatch]);
 
   const handleAvatarClick = () => {
     setIsLogoutVisible((prev) => !prev);
