@@ -1,5 +1,5 @@
 import React from "react";
-import { OrgBasicInfo } from "@/components/organizations/organizationRequest/_components/OrgBasicInfo";
+import { OrgBasicInfo } from "@/components/organizations/organizationRequest/_component/OrgBasicInfo";
 
 const OrgBasicInfoPage = () => <OrgBasicInfo />;
 
