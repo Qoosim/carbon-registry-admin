@@ -1,10 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
-import { ErrorMessage } from "../_components/error-message";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { useAppDispatch } from "@/redux/hooks";
 import { alertNotification, getCookie, saveCookie } from "@/redux/auth/actions";
 import { API } from "@/utils/configs/api";
 import { setUser } from "@/redux/auth/authSlice";
@@ -23,7 +21,6 @@ export const OtpVerification = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const searchParams = useSearchParams();
-  // const id = searchParams.get("id");
   const userData = getCookie("userData");
 
   useEffect(() => {
@@ -59,19 +56,15 @@ export const OtpVerification = () => {
         token: formData.token,
         id: userData.id,
       });
-      console.log("Response from otp page:", response);
-      console.log("Token", formData.token);
       
-      
-      const jsonData = response.data;
-      if (jsonData.success) {
+      if (response?.data?.success) {
+        const jsonData = response.data;
         setIsLoading(false);
         dispatch(setUser(jsonData.user));
         saveCookie("userInfo", jsonData.user);
-        // Saving the token and refresh token in cookies with expiry date
         saveCookie(
           "token",
-          jsonData.accessToken,
+          jsonData.user.accessToken,
           new Date(jsonData.expiresIn).getTime()
         );
         saveCookie(

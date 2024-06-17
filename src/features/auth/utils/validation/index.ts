@@ -33,3 +33,13 @@ export const loginSchema = yup.object({
       .required("Password is required"),
   })
   .required();
+
+  export const reviewSchema = yup.object({
+    TypeID: yup
+      .string()
+      .required("OrgId is required"),
+    Description: yup
+      .string()
+      .required("Statement is required"),
+  })
+  .required();

@@ -1,11 +1,15 @@
 import { Reducer, combineReducers, configureStore } from "@reduxjs/toolkit";
 import userReducer from "./auth/authSlice";
+import orgListReducer from "./auth/allOrgsSlice"
+import projectListReducer from "./auth/allProjectsSlice"
 import { persistReducer, persistStore } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 
 
 const reducers = combineReducers({
-    user: userReducer
+    user: userReducer,
+    orgList: orgListReducer,
+    projectList: projectListReducer
 })
 
 const persistConfig = {

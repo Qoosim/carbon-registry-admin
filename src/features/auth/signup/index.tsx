@@ -5,7 +5,6 @@ import { signupSchema } from "@/features/auth/utils/validation";
 import { signUp } from "@/redux/auth/actions";
 import { useAppSelector } from "@/redux/hooks";
 import { yupResolver } from "@hookform/resolvers/yup";
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";

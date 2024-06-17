@@ -28,11 +28,11 @@ export const navItems = [
     },
     {
       url: "org-requests",
-      text: "Org Request",
+      text: "Organizations",
     },
     {
       url: "project-requests",
-      text: "Project Request",
+      text: "Projects",
     },
     {
       url: "account-management",
@@ -154,8 +154,7 @@ export const navItems = [
     "Organization Type", "Organization Name", 
     "Registration Number", "Industry", 
     "Address", "Website",
-    "People", "Organization Logo",
-    "Status", "IsPublic"
+    "Status", "LGA"
   ]
 
   export const orgBasicInfoBodyData = [
@@ -167,9 +166,8 @@ export const navItems = [
   ]
 
   export const projectBasicInfoHeaderData = [
-    "Project Type", "Project Base Info", 
-    "LCR Program", "Sector", 
-    "Confirm Information"
+    "Project Title", "Project Owner", "Project Type", "Project Info", 
+    "GHG Program", "Sector", "Project Status",
   ]
 
   export const projectBasicInfoBodyData = [
