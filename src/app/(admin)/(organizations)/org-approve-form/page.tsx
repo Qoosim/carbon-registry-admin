@@ -1,6 +1,12 @@
-import React from 'react'
-import { OrgApproveForm } from '@/components/organizations/orgApproveForm'
+import React, { Suspense } from "react";
+import { OrgApproveForm } from "@/components/organizations/orgApproveForm";
 
-const OrgApprovePage = () => <OrgApproveForm/>
+const OrgApprovePage = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <OrgApproveForm />
+    </Suspense>
+  );
+};
 
-export default OrgApprovePage
+export default OrgApprovePage;
