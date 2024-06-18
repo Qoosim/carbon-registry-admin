@@ -1,6 +1,12 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { ProjectDenyForm } from "@/components/projects/projDenyForm";
 
-const ProjectDenyPage = () => <ProjectDenyForm />;
+const ProjectDenyPage = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ProjectDenyForm />;
+    </Suspense>
+  );
+};
 
 export default ProjectDenyPage;
