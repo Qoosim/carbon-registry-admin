@@ -36,9 +36,12 @@ const Login = () => {
     <section className="bg-[#ebedf5] w-full flex items-center justify-center py-8 sm:py-0">
       <div className="max-w-[90%] sm:max-w-[70%] mx-auto w-[85%] sm:w-[60%] lg:w-[30%]">
         <h1 className="text-center mb-8 font-telex font-semibold text-slate-600 text-xl sm:text-2xl">
-          Sign in to Lasepa Admin
+          Sign in to LASEPA Admin
         </h1>
-        <form onSubmit={handleSubmit(dataSubmit)} className="flex flex-col gap-4">
+        <form
+          onSubmit={handleSubmit(dataSubmit)}
+          className="flex flex-col gap-4"
+        >
           <input
             type="email"
             id="email"
