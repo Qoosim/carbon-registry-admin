@@ -28,7 +28,7 @@ export const Header = () => {
 
   const handleLogout = () => {
     dispatch(signOut());
-    router.push("/");
+    router.push("/login");
   };
 
   const onClose = () => setMobileNav((prev) => !prev);
@@ -113,7 +113,7 @@ export const MobileNav = ({ close }: { close: () => void }) => {
 
   const handleLogout = () => {
     dispatch(signOut());
-    router.push("/");
+    router.push("/login");
     close();
   };
 

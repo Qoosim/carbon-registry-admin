@@ -56,7 +56,7 @@ export const OtpVerification = () => {
         token: formData.token,
         id: userData.id,
       });
-      
+
       if (response?.data?.success) {
         const jsonData = response.data;
         setIsLoading(false);
@@ -134,7 +134,8 @@ export const OtpVerification = () => {
               </button>
             </div>
             <p className="text-sm text-[#AAACAE]">
-              Enter your Token to verify sign in.
+              OTP code has been sent to your email for verification. Please
+              check your inbox
             </p>
           </div>
           <button
