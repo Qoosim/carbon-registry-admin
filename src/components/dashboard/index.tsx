@@ -83,7 +83,7 @@ export const AdminDashboard = () => {
   const handleLogout = () => {
     dispatch(signOut());
     localStorage.removeItem("userData");
-    router.push("/");
+    router.push("/login");
   };
 
   const onClose = () => setMobileNav((prev) => !prev);
