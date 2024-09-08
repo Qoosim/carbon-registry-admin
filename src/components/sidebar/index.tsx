@@ -6,10 +6,12 @@ import { useRouter } from "next/navigation";
 import React, { ReactNode, useEffect, useState } from "react";
 import LasepaLogo from "../../../public/assets/lasepa-logo.jpeg";
 import SettingLogo from "../../../public/assets/setting-logo.svg";
-import ProfileAvatar from "../../../public/assets/profile-img.jpg";
+import ProfileAvatar from "../../../public/assets/user-avatar.svg";
 import { panels } from "@/constants";
 import { signOut } from "@/redux/auth/actions";
+import Cookies from "js-cookie";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { setUser } from "@/redux/auth/authSlice";
 
 interface SidebarProps {
   children: ReactNode;
@@ -36,6 +38,15 @@ export const Sidebar: React.FC<SidebarProps> = ({ children }) => {
   };
 
   useEffect(() => {
+    if (!user) {
+      const storedUser = Cookies.get("userData");
+      if (storedUser) {
+        dispatch(setUser(JSON.parse(storedUser)));
+      }
+    }
+  });
+
+  useEffect(() => {
     localStorage.setItem("activeIndex", activeIndex.toString());
   }, [activeIndex]);
 
@@ -47,6 +58,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ children }) => {
   const handleLogout = () => {
     dispatch(signOut());
     localStorage.removeItem("userData");
+    Cookies.remove("userData");
     router.push("/");
   };
 
@@ -76,11 +88,6 @@ export const Sidebar: React.FC<SidebarProps> = ({ children }) => {
                         panelIndex
                       )}`}
                       onClick={() => setActivePanel(panelIndex)}
-                    //   style={
-                    //     panelIndex === panels.length - 1
-                    //       ? { marginTop: "2.5rem" }
-                    //       : {}
-                    //   }
                     >
                       <span className="text-md text-[#fff] whitespace-nowrap">
                         {panelItem.text}
@@ -108,13 +115,15 @@ export const Sidebar: React.FC<SidebarProps> = ({ children }) => {
                     </div>
                   </div>
                   <div className="flex items-center gap-4 mt-[1rem] cursor-pointer">
-                    <Image
-                      src={ProfileAvatar}
-                      width={50}
-                      height={50}
-                      alt="Profile Avatar"
-                      className="rounded-full"
-                    />
+                    <div className="size-10 rounded-full border border-slate-200 flex items-center justify-center object-cover">
+                      <Image
+                        src={ProfileAvatar}
+                        width={30}
+                        height={30}
+                        alt="Profile Avatar"
+                        className="rounded-full object-cover"
+                      />
+                    </div>
                     <div className="flex flex-col items-start">
                       <h4 className="text-[#fff] font-semibold">
                         {`${user?.first_name ?? ""} ${user?.last_name ?? ""}` ||

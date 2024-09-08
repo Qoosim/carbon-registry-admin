@@ -10,7 +10,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import HomeLogo from "../../../public/assets/profile-home.svg";
-import ProfileImage from "../../../public/assets/profile-img.jpg";
+import ProfileImage from "../../../public/assets/card-img.jpg";
 
 export const AccountManagement = () => {
   const [isLogoutVisible, setIsLogoutVisible] = useState(false);

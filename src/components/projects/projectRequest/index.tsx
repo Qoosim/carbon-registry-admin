@@ -7,10 +7,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { store } from "@/redux/store";
 import { signOut } from "@/redux/auth/actions";
+import Cookies from "js-cookie";
 import { useAppSelector } from "@/redux/hooks";
 import HomeLogo from "../../../../public/assets/profile-home.svg";
 import LCRLogo from "../../../../public/lasepa.jpeg";
-import ProfileImage from "../../../../public/assets/profile-img.jpg";
+import ProfileImage from "../../../../public/assets/card-img.jpg";
 import { useRouter } from "next/navigation";
 import { MobileNav } from "@/components/mobileNav";
 import { MdMenu } from "react-icons/md";
@@ -29,7 +30,7 @@ interface Proj {
 }
 
 interface ProjectListProps {
-  projectList: Proj[]
+  projectList: Proj[];
 }
 
 export const ProjectRequest: FC<ProjectListProps> = () => {
@@ -63,9 +64,6 @@ export const ProjectRequest: FC<ProjectListProps> = () => {
     getAllProjects();
   }, [dispatch]);
 
-
-  console.log("Project List fetched", fetchedProject);
-
   const handleAvatarClick = () => {
     setIsLogoutVisible((prev) => !prev);
   };
@@ -73,6 +71,7 @@ export const ProjectRequest: FC<ProjectListProps> = () => {
   const handleLogout = () => {
     dispatch(signOut());
     localStorage.removeItem("userData");
+    Cookies.remove("userData");
     router.push("/");
   };
 
@@ -166,7 +165,7 @@ export const ProjectRequest: FC<ProjectListProps> = () => {
           <h1 className="font-rubik font-semibold text-lg text-center text-gray-500 capitalize pt-12 pb-4">
             List of Project Requests
           </h1>
-          <div className="overflow-x-auto">
+          <div className="overflow-auto xl:max-h-[30rem] 2xl:max-h-[50rem]">
             <div className="inline-block min-w-full">
               <div className="overflow-hidden">
                 <table className="min-w-full table-auto border-spacing-y-2 border-spacing-x-0.5">
@@ -177,18 +176,6 @@ export const ProjectRequest: FC<ProjectListProps> = () => {
                         className="p-2 border border-gray-600 mx-1 whitespace-nowrap text-slate-600"
                       >
                         S/N
-                      </th>
-                      <th
-                        scope="col"
-                        className="p-2 border border-gray-600 mx-1 whitespace-nowrap text-slate-600"
-                      >
-                        Organization ID
-                      </th>
-                      <th
-                        scope="col"
-                        className="p-2 border border-gray-600 mx-1 whitespace-nowrap text-slate-600"
-                      >
-                        Project ID
                       </th>
                       <th
                         scope="col"
@@ -206,7 +193,7 @@ export const ProjectRequest: FC<ProjectListProps> = () => {
                         scope="col"
                         className="p-2 border border-gray-600 mx-1 whitespace-nowrap text-slate-600"
                       >
-                        Project Info
+                        Project Website
                       </th>
                     </tr>
                   </thead>
@@ -217,18 +204,12 @@ export const ProjectRequest: FC<ProjectListProps> = () => {
                           {index + 1}
                         </td>
                         <td className="text-clip overflow-x-hidden whitespace-nowrap border border-gray-400 text-center font-light py-1.5 px-3 text-base text-green-700">
-                          <Link href={"#"}>{project.OrgID}</Link>
-                        </td>
-                        <td className="text-clip overflow-x-hidden whitespace-nowrap border border-gray-400 text-center font-light py-1.5 px-3 text-base text-green-700">
-                          <Link href={`/projects/${project.id}`}>
-                            {project.id}
-                          </Link>
-                        </td>
-                        <td className="text-clip overflow-x-hidden whitespace-nowrap border border-gray-400 text-center font-light py-1.5 px-3 text-base">
                           {project.ShortDescription}
                         </td>
                         <td className="text-clip overflow-x-hidden whitespace-nowrap border border-gray-400 text-center font-light py-1.5 px-3 text-base">
-                          {project.FullName}
+                          <Link href={`/projects/${project.id}`}>
+                            {project.FullName}
+                          </Link>
                         </td>
                         <td className="text-clip overflow-x-hidden whitespace-nowrap border border-gray-400 text-center font-light py-1.5 px-3 text-base text-green-700">
                           <Link href={"/project-basic-info"}>
