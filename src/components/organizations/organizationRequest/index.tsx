@@ -10,7 +10,7 @@ import { signOut } from "@/redux/auth/actions";
 import { useAppSelector } from "@/redux/hooks";
 import HomeLogo from "../../../../public/assets/profile-home.svg";
 import LCRLogo from "../../../../public/lasepa.jpeg";
-import ProfileImage from "../../../../public/assets/profile-img.jpg";
+import ProfileImage from "../../../../public/assets/card-img.jpg";
 import { useRouter } from "next/navigation";
 import { MobileNav } from "@/components/mobileNav";
 import { MdMenu } from "react-icons/md";
@@ -28,7 +28,7 @@ interface Org {
 }
 
 interface OrgListProps {
-  orgList: Org[]
+  orgList: Org[];
 }
 
 export const OrganizationRequest: FC<OrgListProps> = () => {
@@ -160,7 +160,7 @@ export const OrganizationRequest: FC<OrgListProps> = () => {
           <h1 className="font-rubik font-semibold text-lg text-center text-gray-500 capitalize pt-12 pb-4">
             List of Organization Requests
           </h1>
-          <div className="overflow-x-auto">
+          <div className="overflow-auto xl:max-h-[30rem] 2xl:max-h-[50rem]">
             <div className="inline-block min-w-full">
               <div className="overflow-hidden">
                 <table className="min-w-full table-auto border-spacing-y-2 border-spacing-x-0.5">
@@ -176,25 +176,13 @@ export const OrganizationRequest: FC<OrgListProps> = () => {
                         scope="col"
                         className="p-2 border border-gray-600 mx-1 whitespace-nowrap text-slate-600"
                       >
-                        Org ID
-                      </th>
-                      <th
-                        scope="col"
-                        className="p-2 border border-gray-600 mx-1 whitespace-nowrap text-slate-600"
-                      >
-                        Account Holder
-                      </th>
-                      <th
-                        scope="col"
-                        className="p-2 border border-gray-600 mx-1 whitespace-nowrap text-slate-600"
-                      >
                         Organization Name
                       </th>
                       <th
                         scope="col"
                         className="p-2 border border-gray-600 mx-1 whitespace-nowrap text-slate-600"
                       >
-                        Organization Info
+                        Organization Website
                       </th>
                     </tr>
                   </thead>
@@ -206,18 +194,10 @@ export const OrganizationRequest: FC<OrgListProps> = () => {
                             {index + 1}
                           </td>
                           <td className="text-clip overflow-x-hidden whitespace-nowrap border border-gray-400 text-center font-light py-1.5 px-3 text-base text-green-700">
-                            <Link href={`/org/${org.id}`}>{org.id}</Link>
-                          </td>
-                          <td className="text-clip overflow-x-hidden whitespace-nowrap border border-gray-400 text-center font-light py-1.5 px-3 text-base">
-                            {org.UserID}
-                          </td>
-                          <td className="text-clip overflow-x-hidden whitespace-nowrap border border-gray-400 text-center font-light py-1.5 px-3 text-base">
-                            {org.Name}
+                            <Link href={`/org/${org.id}`}>{org.Name}</Link>
                           </td>
                           <td className="text-clip overflow-x-hidden whitespace-nowrap border border-gray-400 text-center font-light py-1.5 px-3 text-base text-green-700">
-                            <Link href={"/org-basic-info"}>
-                              {org.Website}
-                            </Link>
+                            <Link href={"/org-basic-info"}>{org.Website}</Link>
                           </td>
                         </tr>
                       );

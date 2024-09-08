@@ -9,9 +9,10 @@ import { signOut } from "@/redux/auth/actions";
 import { useAppSelector } from "@/redux/hooks";
 import HomeLogo from "../../../public/assets/profile-home.svg";
 import LCRLogo from "../../../public/lasepa.jpeg";
-import ProfileImage from "../../../public/assets/profile-img.jpg";
+import ProfileImage from "../../../public/assets/card-img.jpg";
 import { useRouter } from "next/navigation";
 import { MdClose, MdMenu } from "react-icons/md";
+import Cookies from "js-cookie";
 import { MobileNav } from "../mobileNav";
 import { API } from "@/utils/configs/api";
 import {
@@ -24,6 +25,7 @@ import {
   setProjectList,
   setProjectListError,
 } from "@/redux/auth/allProjectsSlice";
+import { setUser } from "@/redux/auth/authSlice";
 
 export const AdminDashboard = () => {
   const [isLogoutVisible, setIsLogoutVisible] = useState(false);
@@ -35,6 +37,15 @@ export const AdminDashboard = () => {
   const router = useRouter();
 
   const { user } = useAppSelector((state) => state.user);
+
+  useEffect(() => {
+    if (!user) {
+      const storedUser = Cookies.get("userData");
+      if (storedUser) {
+        dispatch(setUser(JSON.parse(storedUser)));
+      }
+    }
+  });
 
   useEffect(() => {
     const getAllOrgs = async () => {
@@ -83,6 +94,7 @@ export const AdminDashboard = () => {
   const handleLogout = () => {
     dispatch(signOut());
     localStorage.removeItem("userData");
+    Cookies.remove("userData");
     router.push("/login");
   };
 

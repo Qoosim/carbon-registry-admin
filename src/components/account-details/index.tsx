@@ -4,11 +4,10 @@ import Image from "next/image";
 import React, { ChangeEvent, useRef, useState } from "react";
 import ImgUploadIcon from "../../../public/assets/img-upload-icon.svg";
 import HomeLogo from "../../../public/assets/profile-home.svg";
-import ProfileImage from "../../../public/assets/profile-img.jpg";
+import ProfileImage from "../../../public/assets/card-img.jpg";
 import { API } from "@/utils/configs/api";
 import { Footer } from "@/features/footer";
 import { alertNotification, signOut } from "@/redux/auth/actions";
-import { lgaData } from "@/constants";
 import { store } from "@/redux/store";
 import { useRouter } from "next/navigation";
 import { useAppSelector } from "@/redux/hooks";
@@ -107,14 +106,14 @@ export const AccoutDetails = () => {
             <div className="flex items-center gap-6 mt-5">
               <Image
                 src={ProfileImage}
-                width={120}
-                height={120}
+                width={80}
+                height={80}
                 alt="Profile Logo"
                 className="rounded-full"
               />
               <div className="flex flex-col items-start">
-                <span className="text-xl text-gray-600">Ibrahim Kaizen</span>
-                <span className="text-sm text-gray-500">CEO</span>
+                <span className="text-xl text-gray-600">User Name</span>
+                <span className="text-sm text-gray-500">Positon</span>
               </div>
             </div>
           </div>
@@ -141,7 +140,7 @@ export const AccoutDetails = () => {
                   type="text"
                   id="first_name"
                   className="w-[25rem] border-none rounded-md pr-[10rem]"
-                  value={`${`Ibrahim`}`}
+                  value={`${`User First Name`}`}
                 />
               </div>
             </div>
@@ -157,7 +156,7 @@ export const AccoutDetails = () => {
                   type="text"
                   id="last_name"
                   className="w-[25rem] border-none rounded-md pr-[10rem]"
-                  value={`${`Kaizen`}`}
+                  value={`${`User Last Name`}`}
                 />
               </div>
             </div>
@@ -173,7 +172,7 @@ export const AccoutDetails = () => {
                   type="email"
                   id="email"
                   className="w-[25rem] border-none rounded-md pr-[10rem]"
-                  value={`${`iboladeji@gmail.com`}`}
+                  value={`${`user@gmail.com`}`}
                   disabled
                 />
               </div>
